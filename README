@@ -1,0 +1,8 @@
+El juego se compone por una ventana con animaciones,
+compuestas por un personaje principal, el cual se desplaza
+por la totalidad de la ventana, y una serie de enemigos 
+que aparecen constantemente de manera descendente.
+He utilizado lo aprendido en Python estos meses en la academia
+de ConquerBlocks, las bibliotecas de Pygame y el contenido de
+@luisetindev.
+Espero que os guste, acepto cualquier sugerencia para mejorarlo.
