@@ -27,7 +27,7 @@ playgame = True
 reloj = pygame.time.Clock()
 tiempo_transcurrido = 0 #Contador de tiempo 
 tiempo_oleada = 500      #Tiempo de transcurso para cada oleada
-
+tiempo_oleada_plus = 1500  #Más enemigos con el paso del tiempo
 #-Nuestro personaje en la ventana de juego
 cubo = Cubo(ANCHO/2,ALTO-75)
 
@@ -56,9 +56,11 @@ def gestionar_teclas(teclas):
     if teclas[pygame.K_s]:
         cubo.y += cubo.speed
     if teclas[pygame.K_a]:
-        cubo.x -= cubo.speed
+        if cubo.x >= -1:
+            cubo.x -= cubo.speed
     if teclas[pygame.K_d]:
-        cubo.x += cubo.speed
+       if cubo.x < ANCHO -50:
+            cubo.x += cubo.speed
     if teclas[pygame.K_SPACE]:
         shotgun()
 
@@ -69,6 +71,9 @@ while playgame and vida > 0:
     if tiempo_transcurrido > tiempo_oleada:
         enemies.append(Villian(random.randint(0,ANCHO),-100))
         tiempo_transcurrido = 0
+        tiempo_oleada = random.randint(60, tiempo_oleada_plus)
+        if tiempo_oleada_plus > 150:
+            tiempo_oleada_plus -= 15    #Más enemigos con el paso del tiempo
     #1
     events = pygame.event.get()
     for event in events:
@@ -90,6 +95,7 @@ while playgame and vida > 0:
         enemy.movement()
         # IMPACTOS
         if pygame.Rect.colliderect(cubo.rect,enemy.rect):
+            deathsound.play()
             vida -= 1
             print(f"Te quedan {vida} vidas")
             enemies.remove(enemy)
@@ -108,6 +114,7 @@ while playgame and vida > 0:
         if enemy.vida <= 0:
             deathsound.play()   #Sonido muerte  
             enemies.remove(enemy)
+            puntos += 3
 
 
     #6
@@ -115,10 +122,13 @@ while playgame and vida > 0:
     for shot in shots:
         shot.dibujar(ventana)
         shot.movement()
+        if shot.y < 0:
+            shots.remove(shot)
+
     #7
     #Texto en pantalla
     ventana.blit(texto_vida, (20,30))
-    ventana.blit(texto_puntos, (20,70))
+    ventana.blit(texto_puntos, (20,80))
 
     pygame.display.update()
 deathsound.play()   #Sonido muerte

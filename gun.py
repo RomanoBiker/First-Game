@@ -7,7 +7,7 @@ class Gun:
         self.widgh = 8
         self.height = 8
         self.speed = 16  #Velocidad de disparo
-        self.color = "yellow"
+        self.color = "orange"
         #-Dimensiones 
         self.rect = pygame.Rect(self.x,self.y,self.widgh,self.height) 
     def dibujar(self,ventana):
