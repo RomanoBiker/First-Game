@@ -1,3 +1,5 @@
+Se ejecuta desde el archivo 'pygame_project.py'
+
 El juego se compone por una ventana con animaciones,
 compuestas por un personaje principal, el cual se desplaza
 por la totalidad de la ventana, y una serie de enemigos 
